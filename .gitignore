@@ -1,0 +1,20 @@
+# 编译产物
+*.o
+*.ko
+*.mod
+*.mod.c
+*.mod.o
+Module.symvers
+modules.order
+*.cmd
+
+# 可执行文件
+src/avionics_sensor
+src/avionics_sche
+src/avionics_mem
+src/avionics_unified
+
+# 临时文件
+~$*
+~*.tmp
+*.tmp
