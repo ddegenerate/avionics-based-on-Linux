@@ -32,7 +32,7 @@ sudo reboot
 sudo dmesg | grep -i cma
 ```
 
-![CMA预留结果](../images/03-CMA预留结果.png)
+<img width="1919" height="164" alt="image" src="https://github.com/user-attachments/assets/71e8bae1-5ea0-4e90-8cfd-daf259cc969c" />
 
 CMA 地址由内核启动时自动选，用户无需也无法指定。航电场景只需要"一块连续隔离的内存"，不关心具体物理地址。
 
@@ -66,7 +66,7 @@ sudo insmod avionics_cma.ko
 ls -l /dev/avionics_cma   # 确认设备节点生成
 ```
 
-![设备节点验证](../images/03-设备节点验证.png)
+<img width="698" height="54" alt="image" src="https://github.com/user-attachments/assets/5084b131-2f90-43cb-84a5-9218ce24deaa" />
 
 ---
 
@@ -110,7 +110,7 @@ sudo cat /sys/kernel/debug/cma/reserved/used    # 已分配页数
 
 换算：`133120 页 * 4KB = 520 MB`，与 GRUB 设置的 `cma=520M` 一致。加载驱动后已分配约 513.7MB，差的 6MB 是内核元数据和 DMA 2MB 对齐开销。
 
-![CMA debugfs验证](../images/03-CMA-debugfs验证.png)
+<img width="919" height="164" alt="image" src="https://github.com/user-attachments/assets/1d6e0114-106e-46f3-90ca-cff71a8fd091" />
 
 ### 6.2 缺页事件对比
 
