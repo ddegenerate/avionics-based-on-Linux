@@ -44,7 +44,7 @@ sudo bash -c 'echo "+cpuset" > cgroup.subtree_control'
 
 `cgroup.subtree_control` 中出现 `cpuset` 即为激活成功：
 
-![cpuset控制器激活](../images/02-cpuset激活.png)
+<img width="1140" height="86" alt="image" src="https://github.com/user-attachments/assets/7e0408af-984e-4c2a-9e16-a988efd55ab3" />
 
 ```bash
 # 2. 创建子 cgroup
@@ -54,7 +54,7 @@ cd avionics_partition
 
 cgroups v2 中 `mkdir` 即自动生成子 cgroup，内核会在该目录内自动填充接口文件：
 
-![cgroup目录自动生成](../images/02-cgroup目录内容.png)
+<img width="754" height="397" alt="image" src="https://github.com/user-attachments/assets/c5a65120-b53c-4660-ac1d-c50a1de37fe4" />
 
 ```bash
 # 3. 划拨 CPU 10 和 11
@@ -82,7 +82,7 @@ cat /proc/self/status | grep Cpus_allowed_list  # 应输出 10-11
 
 终端及其所有子进程现在只能在核心 10 和 11 上运行。此时 SCHED_DEADLINE 可以在隔离核心上正常使用了：
 
-![cgroups分区后SCHED_DEADLINE运行](../images/02-cgroups分区就绪.png)
+<img width="1285" height="428" alt="image" src="https://github.com/user-attachments/assets/36d7841b-163f-498a-9ff5-b87bda8ef03d" />
 
 ---
 
@@ -157,29 +157,29 @@ sudo ./avionics_sche
 
 终端输出结果：
 
-![无干扰-终端结果](../images/02-无干扰-终端结果.png)
+<img width="1776" height="704" alt="image" src="https://github.com/user-attachments/assets/d9b5c00c-de13-4e8b-b517-ae761f2c31bd" />
 
 左侧终端显示 Jitter 已降至 13 μs，初步说明核心隔离有效。
 
 KernelShark 整体调度轨迹：
 
-![无干扰-KernelShark整体](../images/02-无干扰-KernelShark整体.png)
+<img width="1893" height="504" alt="image" src="https://github.com/user-attachments/assets/6cdceb07-9c38-4d83-b274-f08e94bbc60d" />
 
 上方非隔离核心（CPU 7-9）黑线密布、色块挤压，系统调度器频繁切换进程。下方隔离核心（CPU 10-11）几乎为空，仅有零星黑线。
 
 选取隔离核心上一条黑线放大分析——这是终端 bash 进程在隔离区内的背景调度，关注点聚焦于测试进程 `avionics_sensor`：
 
-![无干扰-黑线放大](../images/02-无干扰-黑线放大.png)
+<img width="1122" height="733" alt="image" src="https://github.com/user-attachments/assets/1698b835-402f-4e4c-953d-73be5ecefbdf" />
 
 在 Search 窗口搜索 `avionics_sensor`，其生命周期内有两个关键事件：
 
 **事件 1：程序启动：**
 
-![无干扰-事件1启动](../images/02-无干扰-事件1启动.png)
+<img width="1182" height="729" alt="image" src="https://github.com/user-attachments/assets/9f1a36e7-a1df-4bb1-9a5f-062f996b6206" />
 
 **事件 2：程序结束：**
 
-![无干扰-事件2结束](../images/02-无干扰-事件2结束.png)
+<img width="1174" height="730" alt="image" src="https://github.com/user-attachments/assets/06e18b9f-cbca-4057-96e5-9b93f6a54794" />
 
 | 事件 | CPU | 时间戳 (s) | 详情 |
 | :--- | :--- | :--- | :--- |
@@ -196,21 +196,21 @@ KernelShark 整体调度轨迹：
 
 终端输出结果：
 
-![有干扰-终端结果](../images/02-有干扰-终端结果.png)
+<img width="1174" height="730" alt="image" src="https://github.com/user-attachments/assets/f92b48be-790e-4f9b-9bd5-a65b7944b251" />
 
 Jitter 依然保持极低水平，平均执行时间仅上升几十微秒。
 
 KernelShark 整体调度轨迹：
 
-![有干扰-KernelShark整体](../images/02-有干扰-KernelShark整体.png)
+<img width="1642" height="580" alt="image" src="https://github.com/user-attachments/assets/edccc470-01d4-439e-a15c-36ef6cf4e4ca" />
 
 非隔离核心（CPU 6-9）已被压力负载完全填满，隔离核心（CPU 10-11）几乎不受波及。
 
 搜索 `avionics_sensor`，同样只有头尾两个关键事件：
 
-![有干扰-事件1启动](../images/02-有干扰-事件1启动.png)
+<img width="1185" height="785" alt="image" src="https://github.com/user-attachments/assets/2c13bbf4-05c1-44db-bb3b-fccef7b62e9a" />
 
-![有干扰-事件2结束](../images/02-有干扰-事件2结束.png)
+<img width="1185" height="785" alt="image" src="https://github.com/user-attachments/assets/65b729e2-cf0e-4aa3-b0ef-578e75c07494" />
 
 | 事件 | CPU | 时间戳 (s) | 详情 |
 | :--- | :--- | :--- | :--- |
@@ -221,7 +221,7 @@ KernelShark 整体调度轨迹：
 
 核心隔离的对比汇总：
 
-![核心隔离结果对比](../images/02-核心隔离结果.png)
+<img width="1782" height="918" alt="image" src="https://github.com/user-attachments/assets/e341d3d1-6108-4487-a695-263a8a5b5119" />
 
 | 运行核心 | Avg | WCET | Jitter |
 | :--- | :--- | :--- | :--- |
@@ -235,29 +235,29 @@ KernelShark 整体调度轨迹：
 
 终端输出结果：
 
-![时间窗口-终端结果](../images/02-时间窗口-终端结果.png)
+<img width="1629" height="735" alt="image" src="https://github.com/user-attachments/assets/4eba740d-f540-4b81-9882-66ab37626bc8" />
 
 平均执行时间 2154 μs，最坏 8938 μs。开启了时间窗口后，程序运行 3ms 就被强制休眠 7ms，单次运行时长 + 休眠时长 + 调度开销导致最坏情况比不开窗口时高，符合预期。
 
 KernelShark 远观整体调度：
 
-![时间窗口-KernelShark远观](../images/02-时间窗口-KernelShark远观.png)
+<img width="1913" height="459" alt="image" src="https://github.com/user-attachments/assets/d76ab9c2-d689-40ff-92f7-e63607c722d0" />
 
 非隔离核心被压力填满，隔离核心（CPU 10-11）上的紫色条呈等长周期状出现。
 
 放大观察紫色色块部分：
 
-![时间窗口-KernelShark近观](../images/02-时间窗口-KernelShark近观.png)
+<img width="1913" height="459" alt="image" src="https://github.com/user-attachments/assets/1465e1d0-1448-4135-9eb2-2956e03e6fc2" />
 
 核心 10 和核心 11 的紫色色块等长且周期出现，时间分区生效。
 
 在 Search 窗口检索 `avionics_sche`，选取连续三个调度事件分析一个完整周期：
 
-![时间窗口-事件1](../images/02-时间窗口-事件1.png)
+<img width="1105" height="728" alt="image" src="https://github.com/user-attachments/assets/6df364ed-f714-429c-868d-2a858e421d1e" />
 
-![时间窗口-事件2](../images/02-时间窗口-事件2.png)
+<img width="1110" height="819" alt="image" src="https://github.com/user-attachments/assets/417648fa-6eb2-4fb2-82a0-f9f253cdd753" />
 
-![时间窗口-事件3](../images/02-时间窗口-事件3.png)
+<img width="1110" height="845" alt="image" src="https://github.com/user-attachments/assets/b4ddbf50-5015-43a2-ae7c-581587203970" />
 
 | 事件 | CPU | 时间戳 (s) | 详情 |
 | :--- | :--- | :--- | :--- |
