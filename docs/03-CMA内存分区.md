@@ -118,11 +118,11 @@ sudo cat /sys/kernel/debug/cma/reserved/used    # 已分配页数
 
 - **CMA 版本：** 只在 `memset` 预热阶段有缺页，进入矩阵运算后零缺页
 
-![CMA版本缺页追踪](../images/03-CMA-缺页追踪.png)
+<img width="1923" height="780" alt="image" src="https://github.com/user-attachments/assets/baf60b27-560e-41f1-9e6b-831f30a409f2" />
 
 - **普通版本：** 首次访问每个虚拟页都会缺页，内存压力下页面可能被换出导致更多缺页
 
-![普通版本缺页追踪](../images/03-普通-缺页追踪.png)
+<img width="1923" height="780" alt="image" src="https://github.com/user-attachments/assets/87f0f2c1-5d41-4c6f-ab4b-ef2b5ab532dc" />
 
 ### 6.3 抗干扰测试
 
@@ -134,11 +134,11 @@ stress-ng --vm 4 --vm-bytes 2G --timeout 60s
 
 先测无压力的 CMA 基准：
 
-![无负载CMA版本](../images/03-无负载CMA.png)
+<img width="906" height="293" alt="image" src="https://github.com/user-attachments/assets/c9497bb4-b907-496e-bafe-b3f2bb9c4eba" />
 
 再在压力下分别测 CMA 版本和普通版本：
 
-![CMA对比结果](../images/03-CMA对比结果.png)
+<img width="1731" height="626" alt="image" src="https://github.com/user-attachments/assets/b3aa6d4f-6bb1-42c1-930a-dcfa3cd43be6" />
 
 | 测试场景 | Avg | Jitter |
 | :--- | :--- | :--- |
