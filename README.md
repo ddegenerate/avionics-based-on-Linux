@@ -22,22 +22,22 @@
 graph TB
     subgraph L4["第四层：L3 缓存分区"]
         D1["resctrl CAT"]
-        D2["2MB 专属硅片缓存<br/>消除 Cache Miss 抖动"]
+        D2["2MB 缓存<br/>消除 Cache Miss 抖动"]
     end
 
     subgraph L3["第三层：物理内存分区"]
         C1["CMA + dma_alloc_coherent"]
-        C2["512MB 专属连续物理内存<br/>杜绝缺页中断"]
+        C2["512MB 专属连续物理内存<br/>防止缺页中断"]
     end
 
     subgraph L2["第二层：时间分区"]
         B1["SCHED_DEADLINE / CBS"]
-        B2["3ms 运行 / 10ms 周期<br/>ARINC 653 风格时间窗口"]
+        B2["3ms 运行 / 10ms 周期<br/>TDMA时间窗口"]
     end
 
     subgraph L1["第一层：CPU 核心隔离"]
         A1["cgroups v2 cpuset"]
-        A2["核心 10-11 独立调度域<br/>杜绝外部调度抢占"]
+        A2["核心 10-11 独立调度域<br/>防止外部调度抢占"]
     end
 
     L1 --> L2 --> L3 --> L4
