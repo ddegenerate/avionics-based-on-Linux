@@ -221,7 +221,7 @@ KernelShark 整体调度轨迹：
 
 核心隔离的对比汇总：
 
-<img width="1782" height="918" alt="image" src="https://github.com/user-attachments/assets/e341d3d1-6108-4487-a695-263a8a5b5119" />
+<img width="1204" height="833" alt="image" src="https://github.com/user-attachments/assets/ac013861-5625-42e7-9341-cddd793caba6" />
 
 | 运行核心 | Avg | WCET | Jitter |
 | :--- | :--- | :--- | :--- |
