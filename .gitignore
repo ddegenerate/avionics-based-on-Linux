@@ -1,0 +1,20 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# IDE / editor
+.vscode/
+.idea/
+
+# Build artifacts
+*.o
+*.out
+*.exe
+avionics_parallel_v*
+
+# Generated trace logs (too large)
+trace_log.csv
+trace_log.png
+
+# Linux artifacts
+*.dat
