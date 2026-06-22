@@ -1,0 +1,11 @@
+# Force GitHub Linguist to treat C++ as primary language
+*.cpp linguist-language=C++
+*.hpp linguist-language=C++
+*.h linguist-language=C++
+
+# Mark docs (they're large but not code)
+docs/* linguist-documentation
+
+# Binary assets
+*.png binary
+*.jfif binary
